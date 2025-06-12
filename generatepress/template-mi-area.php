@@ -3,9 +3,6 @@
  * Template Name: Mi Área de Asociación
  */
 
-// BLOQUE 1: LÓGICA DE PROCESAMIENTO "SEARCH-OR-CREATE-THEN-LINK"
-// ----------------------------------------------------------------
-
 $mensaje_exito = '';
 $errores_miembro = array();
 
@@ -16,14 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_miembro_nonce'])) 
         $dni_miembro = sanitize_text_field($_POST['miembro_dni']);
         $id_asociacion = get_current_user_id();
 
-        // 1. Validaciones básicas
         if (empty($nombre_miembro)) $errores_miembro[] = 'El nombre del miembro no puede estar vacío.';
         if (empty($dni_miembro)) $errores_miembro[] = 'El DNI del miembro no puede estar vacío.';
 
         if (count($errores_miembro) == 0) {
             $id_miembro_a_asociar = 0;
 
-            // 2. Buscar si ya existe un miembro con ese DNI en todo el sistema
             $args_check_dni = array(
                 'post_type' => 'miembro', 'post_status' => 'publish', 'posts_per_page' => 1,
                 'meta_query' => array( array( 'key' => 'miembro_dni', 'value' => $dni_miembro, 'compare' => '=' ) )
@@ -31,12 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_miembro_nonce'])) 
             $existing_members = get_posts($args_check_dni);
 
             if (!empty($existing_members)) {
-                // 3a. SI EXISTE: Usamos el ID del miembro encontrado
                 $id_miembro_a_asociar = $existing_members[0]->ID;
                 $mensaje_exito = "El miembro ya existía en el sistema y ha sido asociado a tu cuenta.";
 
             } else {
-                // 3b. SI NO EXISTE: Creamos un nuevo miembro en el directorio global
                 $args_nuevo_miembro = array(
                     'post_title'  => $nombre_miembro, 'post_type' => 'miembro', 'post_status' => 'publish',
                 );
@@ -50,18 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_miembro_nonce'])) 
                 }
             }
 
-            // 4. Si tenemos un ID de miembro (existente o nuevo), lo asociamos al usuario
             if ($id_miembro_a_asociar > 0) {
-                // Obtenemos la lista actual de IDs de miembros de la asociación
                 $ids_actuales = get_user_meta($id_asociacion, 'id_miembros_asociados', true);
                 if (!is_array($ids_actuales)) {
                     $ids_actuales = array();
                 }
 
-                // Añadimos el nuevo ID solo si no está ya en la lista
                 if (!in_array($id_miembro_a_asociar, $ids_actuales)) {
                     $ids_actuales[] = $id_miembro_a_asociar;
-                    // Guardamos el array actualizado en el perfil del usuario
                     update_user_meta($id_asociacion, 'id_miembros_asociados', $ids_actuales);
                 } else {
                     $mensaje_exito = "Este miembro ya estaba asociado a tu cuenta.";
@@ -70,33 +59,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_miembro_nonce'])) 
         }
     }
 }
-//Borrado de usuarios
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['baja_miembro_nonce'])) {
     if (wp_verify_nonce($_POST['baja_miembro_nonce'], 'baja_miembro_accion')) {
         $id_miembro_a_borrar = intval($_POST['miembro_id_a_borrar']);
         $id_asociacion = get_current_user_id();
 
         if ($id_miembro_a_borrar > 0) {
-            // Obtenemos la lista actual de IDs de miembros
             $ids_actuales = get_user_meta($id_asociacion, 'id_miembros_asociados', true);
             if (!is_array($ids_actuales)) {
                 $ids_actuales = array();
             }
 
-            // Buscamos el ID a borrar y lo eliminamos del array
             if (($key = array_search($id_miembro_a_borrar, $ids_actuales)) !== false) {
                 unset($ids_actuales[$key]);
             }
 
-            // Guardamos el array actualizado
             update_user_meta($id_asociacion, 'id_miembros_asociados', $ids_actuales);
             $mensaje_exito = "Miembro dado de baja de tu asociación correctamente.";
         }
     }
 }
 
-
-// Comienza la parte visual de la página
 get_header();
 ?>
 
@@ -117,17 +100,14 @@ get_header();
                         <div class="lista-miembros">
                             <h3>Mis Miembros Asociados</h3>
                             <?php
-                            // BLOQUE 2: NUEVA LÓGICA PARA MOSTRAR LA LISTA
-                            // ----------------------------------------------------
-                            // 1. Obtenemos el array de IDs de miembros del perfil del usuario
+
                             $ids_mis_miembros = get_user_meta(get_current_user_id(), 'id_miembros_asociados', true);
 
                             if (!empty($ids_mis_miembros) && is_array($ids_mis_miembros)) :
-                                // 2. Hacemos una consulta para obtener solo los posts cuyo ID esté en nuestro array
                                 $args_mis_miembros = array(
                                     'post_type' => 'miembro',
                                     'posts_per_page' => -1,
-                                    'post__in' => $ids_mis_miembros, // ¡LA CLAVE!
+                                    'post__in' => $ids_mis_miembros,
                                     'orderby' => 'title',
                                     'order' => 'ASC'
                                 );
