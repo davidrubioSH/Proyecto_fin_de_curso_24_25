@@ -1,0 +1,60 @@
+/*
+Theme Name: GeneratePress
+Theme URI: https://generatepress.com
+Author: Tom Usborne
+Author URI: https://generatepress.com/about
+Description: GeneratePress is a lightweight WordPress theme built with a focus on speed and usability. Performance is important to us, which is why a fresh GeneratePress install adds less than 10kb (gzipped) to your page size. We take full advantage of the block editor (Gutenberg), which gives you more control over creating your content. If you use page builders, GeneratePress is the right theme for you. It is completely compatible with all major page builders, including Beaver Builder and Elementor. Thanks to our emphasis on WordPress coding standards, we can boast full compatibility with all well-coded plugins, including WooCommerce. GeneratePress is fully responsive, uses valid HTML/CSS, and is translated into over 25 languages by our amazing community of users. A few of our many features include 60+ color controls, powerful dynamic typography, 5 navigation locations, 5 sidebar layouts, dropdown menus (click or hover), and 9 widget areas. Learn more and check out our powerful premium version at https://generatepress.com
+Version: 3.6.0
+Requires at least: 6.5
+Tested up to: 6.8
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: generatepress
+Tags: two-columns, three-columns, one-column, right-sidebar, left-sidebar, footer-widgets, blog, e-commerce, flexible-header, full-width-template, buddypress, custom-header, custom-background, custom-menu, custom-colors, sticky-post, threaded-comments, translation-ready, rtl-language-support, featured-images, theme-options
+
+GeneratePress, Copyright 2014-2025 EDGE22 Studios LTD.
+GeneratePress is distributed under the terms of the GNU GPL
+
+GeneratePress is based on Underscores http://underscores.me/, (C) 2012-2025 Automattic, Inc.
+
+Actual CSS can be found in /assets/css/ folder.
+*/
+
+/*Estilos del Single de Eventos*/
+.evento-contenedor { display: flex; flex-wrap: wrap; gap: 30px; }
+.evento-poster { flex: 1; min-width: 300px; }
+.evento-poster img { max-width: 100%; height: auto; border-radius: 8px; }
+.evento-datos { flex: 2; min-width: 300px; }
+.evento-datos h1 { margin-top: 0; }
+.info-item { margin-bottom: 15px; }
+.info-item strong { display: block; color: #555; }
+.bloque-inscripciones { border: 2px dashed #ccc; padding: 20px; text-align: center; margin-top: 40px; }.evento-contenedor { display: flex; flex-wrap: wrap; gap: 30px; }
+.evento-poster { flex: 1; min-width: 300px; }
+.evento-poster img { max-width: 100%; height: auto; border-radius: 8px; }
+.evento-datos { flex: 2; min-width: 300px; }
+.evento-datos h1 { margin-top: 0; }
+.info-item { margin-bottom: 15px; }
+.info-item strong { display: block; color: #555; }
+.bloque-inscripciones { border: 2px dashed #ccc; padding: 20px; text-align: center; margin-top: 40px; }
+
+/* Estilos del formulario de creacion de evento */
+.form-crear-evento .form-group { margin-bottom: 20px; }
+.form-crear-evento label { display: block; font-weight: bold; margin-bottom: 5px; }
+.form-crear-evento input[type="text"], .form-crear-evento input[type="date"], .form-crear-evento input[type="url"], .form-crear-evento textarea {
+    width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;
+}
+.form-crear-evento .aviso-exito { padding: 20px; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 5px; }
+.form-crear-evento .aviso-error { padding: 20px; background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; border-radius: 5px; margin-bottom: 20px; }
+
+/* Estilos del panel de miembros */
+.gestion-miembros { display: flex; flex-wrap: wrap; gap: 40px; }
+.lista-miembros, .form-add-miembro { flex: 1; min-width: 300px; }
+.lista-miembros table { width: 100%; border-collapse: collapse; }
+.lista-miembros th, .lista-miembros td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+.lista-miembros th { background-color: #f2f2f2; }
+.form-add-miembro form .form-group { margin-bottom: 15px; }
+.form-add-miembro label { display: block; font-weight: bold; }
+.form-add-miembro input[type="text"] { width: 100%; padding: 8px; }
+.aviso-exito { padding: 15px; background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; border-radius: 5px; margin-bottom: 15px; }
+.aviso-error { padding: 15px; background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; border-radius: 5px; margin-bottom: 15px; }
