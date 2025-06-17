@@ -20,7 +20,7 @@ Antes de empezar, instala y activa los siguientes plugins desde el panel de Word
 
 1.  **Preparar WordPress:**
     * Instala una copia nueva de WordPress en tu servidor local.
-    * Durante la instalación, crea una base de datos nueva y vacía (p. ej., `napoleonic_events_local`).
+    * Durante la instalación, crea una base de datos nueva y vacía `proyecto`, crea ademas un usuario para dicha base de datos con nombre `admin` y contraseña `password`, y otorgale todos los provilegios sobre la base de datos que has creado.
 
 2.  **Copiar Archivos del Proyecto:**
     * Copia la carpeta del tema de este repositorio (`generatepress`) en la carpeta `wp-content/themes/` de tu nueva instalación de WordPress.
@@ -51,3 +51,7 @@ Antes de empezar, instala y activa los siguientes plugins desde el panel de Word
 
 5.  **Configuración Final:**
     * Ve a **Ajustes -> Enlaces Permanentes** en el panel de WordPress y simplemente haz clic en **"Guardar Cambios"** para regenerar las URLs. (NO TOCAR NINGUN AJUSTE)
+
+6.  **Usuario de Wordpress:**
+    * Nombre: `Administrador`
+    * Contraseña: `Administrador`
